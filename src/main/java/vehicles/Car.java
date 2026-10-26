@@ -26,27 +26,38 @@ public class Car extends Vehicle {
 
         // TODO [Step 2.1]: Validate fuelLevelPercent is between 0 and 100 (inclusive).
         // If fuelLevelPercent < 0 or fuelLevelPercent > 100, throw IllegalArgumentException
+        if (fuelLevelPercent < 0 || fuelLevelPercent > 100) {
+            throw new IllegalArgumentException("Fuel level must be between 0 and 100 (inclusive).");
+        }
 
         // TODO [Step 2.2]: Assign fuelLevelPercent
+        this.fuelLevelPercent = fuelLevelPercent;
     }
 
     public int getFuelLevelPercent() {
         // TODO [Step 2.3]: Return fuelLevelPercent
-        return 0;
+        return fuelLevelPercent;
     }
 
     public void refuel(int amount) {
         // TODO [Step 2.4]: Check amount > 0. If amount <= 0, throw IllegalArgumentException
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Refuel amount must be greater than 0.");
+        }
 
         // TODO [Step 2.5]: Add amount to fuelLevelPercent, capped at 100
         // Hint: this.fuelLevelPercent = Math.min(100, this.fuelLevelPercent + amount);
+        this.fuelLevelPercent = Math.min(100, this.fuelLevelPercent + amount);
     }
 
     @Override
     public double calculateTravelTime(double distanceInKm) {
         // TODO [Step 2.6]: Check distanceInKm > 0. If distanceInKm <= 0, throw IllegalArgumentException
+        if (distanceInKm <= 0) {
+            throw new IllegalArgumentException("Distance must be greater than 0.");
+        }
 
         // TODO [Step 2.7]: Return distanceInKm / getMaxSpeed()
-        return 0.0;
+        return distanceInKm / getMaxSpeed();
     }
 }
