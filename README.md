@@ -3,76 +3,63 @@
 **The British College (Leeds Beckett University)**
 
 ```
-Progress: [████████████░░░░░░] Step 2 of 3 (In Progress)
+Progress: [██████████████████] Step 3 of 3 (In Progress)
 ```
 
 ---
 
-## ✅ Step 1 Complete! Excellent job on `Bicycle.java`!
+## ✅ Step 2 Complete! Great work on `Car.java`!
 
-You successfully implemented constructor chaining with `super()`, encapsulated `gearCount`, and enforced defensive invariants.
+You successfully handled bounded range invariants (`0 <= fuel <= 100`) and encapsulated state updates.
 
-Now let's move on to Step 2.
+Now, for the final challenge, you will implement a **Polymorphic Fleet Manager**.
 
 ---
 
-## 🏎️ Step 2: Implement `Car.java`
+## 🏢 Step 3: Implement `FleetManager.java`
 
-Open [`src/main/java/vehicles/Car.java`](src/main/java/vehicles/Car.java) in your IDE.
+Open [`src/main/java/vehicles/FleetManager.java`](src/main/java/vehicles/FleetManager.java) in your IDE.
 
-In this step, you will implement a motorized vehicle with fuel level tracking and refuel domain logic.
+Polymorphism allows you to treat different subclasses (`Bicycle`, `Car`, etc.) uniformly as `Vehicle` objects without needing `instanceof` or casting.
 
 ### Your Tasks:
-1. **Extend `Vehicle`:** `Car` must inherit from `Vehicle`.
-2. **Encapsulate `fuelLevelPercent`:**
-   - Store `int fuelLevelPercent` (0 to 100) as a private field.
-   - Provide a getter: `public int getFuelLevelPercent()`.
-3. **Constructor Chaining & Range Invariants:**
-   - In `Car(String model, int maxSpeed, int passengerCapacity, int fuelLevelPercent)`:
-     - Call `super(model, maxSpeed, passengerCapacity)`.
-     - Validate that `fuelLevelPercent >= 0 && fuelLevelPercent <= 100`. If outside this range, throw an `IllegalArgumentException("Fuel level must be between 0 and 100")`.
-     - Assign `this.fuelLevelPercent = fuelLevelPercent`.
-4. **Implement Refuel Logic (`refuel(int amount)`):**
-   - Check input: if `amount <= 0`, throw an `IllegalArgumentException("Refuel amount must be positive")`.
-   - Add `amount` to `fuelLevelPercent`, but cap at **100%** (a fuel tank cannot be more than 100% full):
-     ```java
-     this.fuelLevelPercent = Math.min(100, this.fuelLevelPercent + amount);
-     ```
-5. **Implement `calculateTravelTime(double distanceInKm)`:**
-   - Check input: if `distanceInKm <= 0`, throw an `IllegalArgumentException("Distance must be positive")`.
-   - Return `distanceInKm / (double) getMaxSpeed()`.
+1. **Implement `addVehicle(Vehicle vehicle)`:**
+   - Add defensive check: if `vehicle == null`, throw an `IllegalArgumentException("Vehicle cannot be null")`.
+   - Add the vehicle to the internal `vehicles` list.
+2. **Implement `getTotalPassengerCapacity()`:**
+   - Loop over `vehicles` and sum `v.getPassengerCapacity()` for each vehicle.
+   - Return the total capacity.
+   - *Notice how this works polymorphically: whether it's a Bicycle (1 passenger) or a Car (5 passengers), Java calls the correct method via dynamic dispatch!*
+3. **Implement `findFastestVehicle()`:**
+   - If `vehicles` is empty, return `null`.
+   - Otherwise, iterate through `vehicles` and find the vehicle with the highest `getMaxSpeed()`.
+   - Return that `Vehicle`.
 
 ---
 
-## 🧪 How to Verify Step 2 Locally
+## 🧪 How to Verify Step 3 Locally
 
-Run both Step 1 and Step 2 tests:
+Run all unit tests across the entire project:
 
 ```bash
-mvn test -Dtest=Step1BicycleTest,Step2CarTest
+mvn test
 ```
-*(Or run `Step2CarTest.java` directly in your IDE).*
+*(Or right-click the `src/test/java` folder and select **Run 'All Tests'**).*
 
-You should see all **6 tests pass**:
-* `testCarInitialization`
-* `testCalculateTravelTime`
-* `testThrowsOnInvalidFuelLevel`
-* `testRefuel`
-* `testRefuelRejectsInvalidAmount`
-* `testThrowsOnInvalidDistance`
+All tests across `Step1BicycleTest`, `Step2CarTest`, and `Step3FleetTest` should pass!
 
 ---
 
-## 🚀 How to Advance to Step 3
+## 🚀 How to Finish the Lab
 
-Once your local tests are passing:
+Once all your tests pass locally:
 
 ```bash
-git add src/main/java/vehicles/Car.java
-git commit -m "Step 2: Completed Car implementation"
+git add src/main/java/vehicles/FleetManager.java
+git commit -m "Step 3: Completed FleetManager implementation"
 git push origin main
 ```
 
 > [!TIP]
 > After pushing, wait ~15 seconds and refresh this page on GitHub (or run `git pull` locally).  
-> GitHub Actions will verify your solution and update this `README.md` to unlock **Step 3: Polymorphic Fleet Manager**!
+> GitHub Actions will verify your entire lab and grant you the **Week 1 Exercise 2 Completion Badge**!
